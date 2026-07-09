@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdollah Abadian — NLP & Computational Social Science</title>
+<style>
+  :root{
+    --ink:#151a23;
+    --paper:#eef0ea;
+    --line:#c9cdbf;
+    --signal:#3a6b5c;
+    --signal-warm:#b5652e;
+    --muted:#5c6270;
+    --card:#f7f8f3;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Iowan Old Style','Palatino Linotype',Georgia,serif;
+    line-height:1.6;
+  }
+  ::selection{background:var(--signal); color:var(--paper);}
+
+  a{color:var(--signal); text-decoration:none; border-bottom:1px solid transparent;}
+  a:hover{border-bottom-color:var(--signal);}
+
+  .wrap{max-width:840px; margin:0 auto; padding:0 28px;}
+
+  /* --- signature element: emotion-signal waveform header --- */
+  header{
+    position:relative;
+    padding:88px 0 56px;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  header svg.wave{
+    position:absolute; left:0; right:0; bottom:0; width:100%; height:64px;
+    opacity:0.55;
+  }
+  .eyebrow{
+    font-family:'Courier New',monospace;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--signal-warm);
+    margin:0 0 14px;
+  }
+  h1{
+    font-size:clamp(34px,5vw,54px);
+    margin:0 0 10px;
+    font-weight:400;
+    letter-spacing:-0.01em;
+  }
+  .role{
+    font-size:18px;
+    color:var(--muted);
+    margin:0 0 26px;
+    max-width:56ch;
+  }
+  .badges{display:flex; flex-wrap:wrap; gap:10px 18px; font-family:'Courier New',monospace; font-size:13px; color:var(--muted);}
+  .badges span{white-space:nowrap;}
+  .badges a{color:var(--muted); border-bottom:1px dotted var(--line);}
+  .badges a:hover{color:var(--signal); border-bottom-color:var(--signal);}
+
+  nav{
+    position:sticky; top:0; z-index:5;
+    background:rgba(238,240,234,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; gap:26px; padding:14px 28px; font-family:'Courier New',monospace; font-size:13px; letter-spacing:.03em;}
+  nav a{color:var(--ink);}
+
+  section{padding:54px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  h2{
+    font-family:'Courier New',monospace;
+    font-size:13px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--signal-warm);
+    margin:0 0 26px;
+  }
+  h2::before{content:"§ ";}
+
+  .lede{font-size:17px; max-width:66ch; color:var(--ink);}
+
+  .interests{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;}
+  .interests span{
+    border:1px solid var(--line);
+    background:var(--card);
+    padding:6px 14px;
+    font-family:'Courier New',monospace;
+    font-size:12.5px;
+    letter-spacing:.02em;
+    border-radius:2px;
+  }
+
+  .pub{
+    padding:22px 0;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:56px 1fr;
+    gap:6px 18px;
+  }
+  .pub:first-of-type{border-top:none;}
+  .pub .year{
+    font-family:'Courier New',monospace;
+    font-size:13px;
+    color:var(--signal);
+    padding-top:3px;
+  }
+  .pub .title{font-size:16.5px; margin:0 0 4px; font-weight:600;}
+  .pub .meta{font-size:14px; color:var(--muted); margin:0;}
+  .pub .status{
+    display:inline-block; margin-top:8px;
+    font-family:'Courier New',monospace; font-size:11px;
+    letter-spacing:.06em; text-transform:uppercase;
+    color:var(--signal-warm); border:1px solid var(--signal-warm);
+    padding:2px 8px; border-radius:2px;
+  }
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:36px;}
+  @media (max-width:640px){
+    .grid2{grid-template-columns:1fr;}
+    .pub{grid-template-columns:1fr;}
+    .pub .year{padding-top:0;}
+  }
+
+  .committee p{margin:4px 0; font-size:15px;}
+  .committee .role{color:var(--muted); font-size:13px;}
+
+  footer{
+    padding:40px 0 60px;
+    font-family:'Courier New',monospace;
+    font-size:13px;
+    color:var(--muted);
+  }
+  footer a{color:var(--muted);}
+
+  .photo-slot{
+    width:132px; height:132px;
+    border:1px solid var(--line);
+    background:var(--card);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Courier New',monospace; font-size:11px; color:var(--muted);
+    text-align:center; padding:10px;
+    float:right;
+    margin:4px 0 20px 24px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#thesis">Thesis</a>
+    <a href="#publications">Publications</a>
+    <a href="#committee">Committee</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">PhD Candidate · Ciencias de la Computación</p>
+    <h1>Abdollah Abadian</h1>
+    <p class="role">Emotion classification, temporal modeling, and mental health inference from social media — at the intersection of NLP, explainable AI, and computational social science.</p>
+    <div class="badges">
+      <span>Centro de Investigación en Computación (CIC)</span>
+      <span>Instituto Politécnico Nacional (IPN)</span>
+      <span>Mexico City</span>
+      <span><a href="https://scholar.google.com/citations?user=e943GQcAAAAJ&hl=en" target="_blank">Google Scholar ↗</a></span>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 800 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 L30,40 L45,14 L60,54 L75,26 L90,40 L120,40 L135,10 L150,58 L165,22 L180,40 L800,40"
+          fill="none" stroke="#3a6b5c" stroke-width="1.4"/>
+  </svg>
+</header>
+
+<div class="wrap">
+
+  <section id="about">
+    <h2>About</h2>
+    <div class="photo-slot">Add<br>photo<br>here</div>
+    <p class="lede">I am a PhD student in Ciencias de la Computación at IPN's Centro de Investigación en Computación (CIC) in Mexico City, working under the supervision of Prof. Grigori Sidorov. My thesis develops temporal, multi-class models of emotional expression in social media text to infer mental health signals — work that sits between natural language processing, explainable AI, and computational social science.</p>
+    <p class="lede">Alongside this, I collaborate on applied NLP problems spanning hope-speech detection, multilingual social support classification, and discourse analysis of online patient communities.</p>
+    <div class="interests">
+      <span>Natural Language Processing</span>
+      <span>Affective Computing</span>
+      <span>Computational Social Science</span>
+      <span>Mental Health Informatics</span>
+      <span>Explainable AI</span>
+      <span>Social Media Analysis</span>
+      <span>Multimodal Machine Learning</span>
+    </div>
+  </section>
+
+  <section id="research">
+    <h2>Research Focus</h2>
+    <div class="grid2">
+      <div>
+        <p class="title" style="font-weight:600; margin-bottom:6px;">Temporal Emotion Modeling</p>
+        <p class="lede" style="font-size:15px;">Multi-class emotion classification that tracks how emotional expression shifts over time in individual posting histories, rather than treating posts as independent samples.</p>
+      </div>
+      <div>
+        <p class="title" style="font-weight:600; margin-bottom:6px;">Mental Health Inference</p>
+        <p class="lede" style="font-size:15px;">Using temporal emotion signals as interpretable features for downstream inference about wellbeing, grounded in explainability rather than black-box prediction.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="thesis">
+    <h2>PhD Thesis — TME-MH Framework</h2>
+    <p class="title" style="font-size:19px; font-weight:600; margin-bottom:6px;">Multi-Class Emotion Classification with Temporal Modeling for Mental Health Inference from Social Media</p>
+    <p class="meta" style="color:var(--muted); font-size:14px; margin-bottom:18px;">Supervisor: Prof. Grigori Sidorov · Research Area: Explainable AI (XAI) &amp; Mental Health NLP</p>
+
+    <p class="lede">This research proposes a Temporal Multi-Class Explainable framework (TME-MH) for detecting and interpreting emotional mental health states from social media text. Rather than the binary "depressed vs. non-depressed" labeling common in prior work, the framework treats fine-grained emotion classification as the primary computational task — grounded in the clinical hierarchy where emotional states are the observable, text-derivable signals from which mental health conditions are inferred.</p>
+
+    <p class="lede">The approach combines a large-scale longitudinal dataset (100,000+ posts, 5,000+ users, spanning five years across Reddit and X), a deep learning architecture pairing transformer-based text encoding (RoBERTa/DeBERTa) with Bi-LSTM temporal modeling and attention, and systematic integration of XAI techniques (SHAP, LIME, Integrated Gradients) — targeting at least eight emotion classes grounded in ICD-11 and DSM-5 criteria.</p>
+
+    <p class="title" style="font-weight:600; font-size:15px; margin:26px 0 10px;">Core Contributions</p>
+    <div class="grid2" style="font-size:14.5px;">
+      <ul style="padding-left:18px; margin:0;">
+        <li style="margin-bottom:10px;">A temporally ordered, multi-platform, multi-class annotated dataset filling a resource gap in the field</li>
+        <li style="margin-bottom:10px;">Fine-grained emotion classification (≥8 classes) across Reddit and X, moving beyond binary paradigms</li>
+        <li style="margin-bottom:10px;">A novel temporal architecture explicitly modeling user-level emotional trajectory</li>
+      </ul>
+      <ul style="padding-left:18px; margin:0;">
+        <li style="margin-bottom:10px;">Cross-platform generalization analysis between Reddit and X</li>
+        <li style="margin-bottom:10px;">A formal XAI evaluation protocol (faithfulness, perturbation, stability) for mental health NLP</li>
+        <li style="margin-bottom:10px;">A clinically motivated framework linking emotion classification to mental health inference</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="publications">
+    <h2>Publications & Preprints</h2>
+
+    <div class="pub">
+      <div class="year">2026</div>
+      <div>
+        <p class="title">Integration of Machine Learning Techniques in ECG-Based Multiclass Arrhythmia Classification with Explainability Analysis</p>
+        <p class="meta">A. Abadian, et al. — Biosensors (MDPI), IF 5.6</p>
+        <span class="status" style="color:var(--signal); border-color:var(--signal);">Published</span>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="year">2026</div>
+      <div>
+        <p class="title">Modeling Multidimensional Perceived Risk in HIV-Related Social Media: A Multi-Label Transformers Framework with Longitudinal Analysis</p>
+        <p class="meta">A. Abadian, et al. — Scientific Reports</p>
+        <span class="status" style="color:var(--signal); border-color:var(--signal);">Accepted</span>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="year">2026</div>
+      <div>
+        <p class="title">A Dual-Stream NLP Framework for Analyzing Fatigue and Medication Adjustment Discourse for HIV, with a Longitudinal Study of Reddit Posts (2015–2025)</p>
+        <p class="meta">A. Abadian, A. Abdullah, Z. Fatima, G. Sidorov, et al. — Research Square (preprint)</p>
+        <span class="status">Under Review</span>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="year">2025</div>
+      <div>
+        <p class="title">Fine-Grained Hope Speech Detection in Social Media with BERT: A PolyHope Shared Task Submission</p>
+        <p class="meta">A. Abadian, G. Sidorov — CEUR-WS Vol. 4098, IberLEF 2025</p>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="year">2025</div>
+      <div>
+        <p class="title">A Comparison of Cloud Computing Simulators</p>
+        <p class="meta">A. Abdullah, M. A. Ather, A. Abadian, et al. — CIC-IPN</p>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="year">2026</div>
+      <div>
+        <p class="title">IberLEF 2026 submissions — lightweight semantic span retrieval (HOPE-EXP) and multilingual social support detection using transformer-based sentence embeddings (SSD)</p>
+        <p class="meta">A. Abadian, et al. — CEUR-WS proceedings</p>
+        <span class="status">In Proceedings</span>
+      </div>
+    </div>
+
+    <p class="title" style="font-weight:600; font-size:15px; margin:30px 0 12px;">Under Review</p>
+    <ul style="padding-left:20px; font-size:14.5px; color:var(--ink); line-height:1.9;">
+      <li>A Physics-Informed AI Framework Linking Cervical Cancer Risk Prediction to Virtual Tissue Modeling</li>
+      <li>RA-Social (2018–2024): A Large-Scale Multimodal Social Media Dataset and Temporal Learning Framework for Predicting Rheumatoid Arthritis Flares</li>
+      <li>A Quantum-Inspired Framework for Semantic Consistency Checking in Uncertain OWL Knowledge Graphs</li>
+      <li>QEMT++: A Quantum-Enhanced Multilingual Transformer for Joint Language Identification and Machine Translation in Low-Resource Pakistani Languages</li>
+      <li>HMAF-Net: Hierarchical Multimodal Attention Fusion for 20-Class Cognitive Abilities State Prediction in Children Using Game Telemetry, Facial Expressions, and EEG</li>
+    </ul>
+
+  </section>
+
+  <section id="committee">
+    <h2>Thesis Committee</h2>
+    <div class="committee">
+      <p><strong>Prof. Grigori Sidorov</strong> — Director <span class="role">(CIC-IPN)</span></p>
+      <p><strong>Dr. Alexander Gelbukh</strong> <span class="role">(CIC-IPN)</span></p>
+      <p><strong>Dr. Ildar Batyrshin</strong> <span class="role">(CIC-IPN)</span></p>
+      <p><strong>Dra. Olga Kolesnikova</strong> <span class="role">(CIC-IPN)</span></p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p class="lede">Open to research internships and collaborations in NLP, affective computing, and computational social science.</p>
+    <p class="lede">
+      Email: <a href="mailto:aabdollaha26@cic.ipn.mx">your.email@example.com</a><br>
+      Google Scholar: <a href="https://scholar.google.com/citations?user=e943GQcAAAAJ&hl=en/citations?user=e943GQcAAAAJ&hl=en" target="_blank">scholar.google.com ↗</a><br>
+      GitHub: <a href="https://github.com/Abdollah-Abadian" target="_blank">github.com/yourusername ↗</a>
+    </p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">Abdollah Abadian · Centro de Investigación en Computación, IPN · Mexico City</div>
+</footer>
+
+</body>
+</html>
